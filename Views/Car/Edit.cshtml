@@ -1,0 +1,19 @@
+@model Car
+
+@{
+    ViewData["Title"] = "Atualização";
+}
+
+<h1>Editar Veículo</h1>
+<form asp-action="edit" autocomplete="off">
+    <input asp-for="Id" />
+
+    <partial name="_Form" />
+
+    <div class="d-flex justify-content-end">
+        <div class="btn-group">
+            <input type="submit" class="btn btn-primary" value="Atualizar" />
+            <a class="btn btn-outline-danger" asp-controller="Car" asp-action="Index">Cancelar</a>
+        </div>
+    </div>
+</form>

@@ -1,0 +1,13 @@
+A ideia é criar um CRUD para cadastro de carros, contendo dados como:
+- id (UUID/INTEGER)
+- Ano (INTEGER)
+- Modelo (STRING)
+- Valor (DOUBLE)
+- Data de cadastro (DATETIME)
+- Montadora (ENUM)
+- Categoria (ENUM) [SUV, UTILITÁRIO, ETC]
+
+Para realizar o filtro, o usuário poderá escolher por:
+- Categoria
+- Montadora
+- Ano

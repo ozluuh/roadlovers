@@ -1,0 +1,16 @@
+@{
+    ViewData["Title"] = "Cadastro";
+}
+
+<h1>Cadastro de Veículos</h1>
+<form asp-action="store" autocomplete="off">
+
+    <partial name="_Form" />
+
+    <div class="d-flex justify-content-end">
+        <div class="btn-group">
+            <btn class="btn-primary" text="Cadastrar" />
+            <a class="btn btn-outline-danger" asp-controller="Car" asp-action="Index">Voltar</a>
+        </div>
+    </div>
+</form>

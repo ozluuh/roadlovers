@@ -1,0 +1,125 @@
+@model List<Car>
+
+@{
+    ViewData["Title"] = "Veículos";
+}
+
+<h1>Veículos Cadastrados</h1>
+@if (@TempData["msg"] != null)
+{
+    <alert message='@TempData["msg"]' type="info"></alert>
+}
+
+<div class="d-flex justify-content-between mb-2">
+    <div class="w-50">
+        <form asp-action="index" method="GET">
+            <div class="input-group">
+                <label for="year" class="input-group-text">Pesquise pelo ano</label>
+                <input
+                    type="number"
+                    name="year"
+                    id="year"
+                    min="1920"
+                    max="9999"
+                    class="form-control"
+                    placeholder="Ano de busca ou vazio para listar todos"
+                />
+                <input type="submit" value="Pesquisar" class="btn btn-outline-secondary">
+            </div>
+        </form>
+    </div>
+    <a class="nav-link" asp-action="store" asp-conroller="car">Cadastrar novo veículo</a>
+</div>
+
+<div class="table-responsive-md">
+    <table class="table table-striped table-hover table-sm table-bordered table-primary">
+        <caption>Total de veículos cadastrados em nossa base: @Model.Count()</caption>
+        <thead class="thead-dark">
+            <tr class="text-center">
+                <th scope="col">#</th>
+                <th scope="col">Ano</th>
+                <th scope="col">Fabricante</th>
+                <th scope="col">Modelo</th>
+                <th scope="col">Classe</th>
+                <th scope="col">Valor</th>
+                <th scope="col">Dt. Registro</th>
+                <th scope="col">Ações</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var car in Model)
+            {
+                <tr class="text-center">
+                    <th scope="row">
+                        <div class="text-right text-end">
+                            @car.Id
+                        </div>
+                    </th>
+                    <td>
+                        <div>
+                            @car.Year
+                        </div>
+                    </td>
+                    <td>@car.Manufacturer.ToString()</td>
+                    <td>@car.Model</td>
+                    <td>
+                        <div>
+                            @car.VehicleType
+                        </div>
+                    </td>
+                    <td>
+                        <div class="d-flex justify-content-between">
+                            <span>R$</span>
+                            <span>@car.Value.ToString("n")</span>
+                        </div>
+                    </td>
+                    <td>
+                        <div>@car.CreatedAt.ToShortDateString()</div>
+                    </td>
+                    <td>
+                        <div class="d-flex justify-content-center">
+                            <div class="btn-group btn-group-sm" role="group" aria-label="Ações">
+                                <a asp-action="edit" asp-route-id="@car.Id" class="btn btn-outline-info" title="Editar">
+                                    <i class="bi bi-pencil"></i>
+                                    <span class="sr-only visually-hidden">Editar</span>
+                                </a>
+
+                                <button
+                                    class="btn btn-outline-danger car-remove"
+                                    title="Excluir"
+                                    data-toggle="modal"
+                                    data-target="#removeCarModal"
+                                    data-car-id="@car.Id"
+                                    data-car-model="@car.Model"
+                                    data-car-manufacturer="@car.Manufacturer"
+                                >
+                                    <i class="bi bi-trash"></i>
+                                    <span class="sr-only visually-hidden">Remover registro</span>
+                                </button>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+<!-- Modal -->
+<partial name="_Modal" />
+
+@section Scripts {
+    <script>
+        $(document).ready(function(){
+            $('.car-remove').click(function(){
+                const elmnt = this;
+
+                const id = $(elmnt).data("car-id");
+                const model = $(elmnt).data('car-model');
+                const manufacturer = $(elmnt).data('car-manufacturer');
+
+                $("#carId").val(parseInt(id));
+                $("#carModelToRemove").text(`${manufacturer} ${model}`);
+            });
+        });
+    </script>
+}

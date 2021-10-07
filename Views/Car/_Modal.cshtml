@@ -1,0 +1,36 @@
+<div
+    class="modal fade"
+    id="removeCarModal"
+    data-keyboard="false"
+    tabindex="-1"
+    aria-labelledby="removeCarModalLabel"
+    aria-hidden="true"
+>
+    <div class="modal-dialog">
+        <div class="modal-content bg-dark">
+            <div class="modal-header">
+                <h5 class="modal-title" id="removeCarModalLabel">Você tem total certeza?</h5>
+                <button type="button" class="btn-close bg-danger" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true"></span>
+                </button>
+            </div>
+
+            <div class="modal-body">
+                <p>
+                    Essa ação não poderá ser revertida. Isso fará com que o veículo
+                    <span id="carModelToRemove" class="font-weight-bold text-danger"></span>
+                    e todos os seus dados sejam completamente removidos.
+                </p>
+            </div>
+
+            <div class="modal-footer justify-content-center">
+                <form asp-action="remove" method="post" class="w-100">
+                    <input type="hidden" name="id" id="carId" />
+                    <button type="submit" class="btn btn-outline-danger w-100 font-weight-bold">
+                        Entendo as consequências, remova o registro do veículo
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
