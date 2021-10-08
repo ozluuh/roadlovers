@@ -3,7 +3,7 @@ using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Checkpoint01.Models
+namespace roadlovers.Models
 {
     public class Car
     {

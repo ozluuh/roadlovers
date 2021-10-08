@@ -1,6 +1,6 @@
 using System;
 
-namespace Checkpoint01.Models
+namespace roadlovers.Models
 {
     public class ErrorViewModel
     {

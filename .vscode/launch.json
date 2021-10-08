@@ -15,7 +15,7 @@
             "type": "coreclr",
             "request": "launch",
             "preLaunchTask": "build",
-            "program": "${workspaceFolder}/bin/Debug/net5.0/Checkpoint01.dll",
+            "program": "${workspaceFolder}/bin/Debug/net5.0/roadlovers.dll",
             "args": [],
             "cwd": "${workspaceFolder}",
             "stopAtEntry": false,

@@ -5,9 +5,9 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using Checkpoint01.Models;
+using roadlovers.Models;
 
-namespace Checkpoint01.Controllers
+namespace roadlovers.Controllers
 {
     public class HomeController : Controller
     {

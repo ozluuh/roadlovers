@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using Checkpoint01.Models;
+using roadlovers.Models;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Checkpoint01.Controllers
+namespace roadlovers.Controllers
 {
     public class CarController : Controller
     {
