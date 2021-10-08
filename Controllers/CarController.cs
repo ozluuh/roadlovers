@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using roadlovers.Models;
 using Microsoft.AspNetCore.Mvc;
+using roadlovers.Models;
 
 namespace roadlovers.Controllers
 {
@@ -21,8 +21,11 @@ namespace roadlovers.Controllers
         {
             if (year == null)
             {
+                ViewBag.filter = false;
                 return View(_carros);
             }
+
+            ViewBag.filter = true;
 
             return View(_carros.FindAll(c => c.Year == year));
 
@@ -77,18 +80,5 @@ namespace roadlovers.Controllers
 
             return RedirectToAction("Index");
         }
-
-        // [HttpPost]
-        // public IActionResult Index(int year)
-        // {
-        //     var cars = _carros.FindAll(c => c.Year == year);
-
-        //     if (year == 0)
-        //     {
-        //         cars = _carros;
-        //     }
-
-        //     return View(cars);
-        // }
     }
 }

@@ -10,8 +10,8 @@
     <alert message='@TempData["msg"]' type="info"></alert>
 }
 
-<div class="d-flex justify-content-between mb-2">
-    <div class="w-50">
+<div class="d-flex justify-content-between align-items-center mb-2">
+    <div class="w--75">
         <form asp-action="index" method="GET">
             <div class="input-group">
                 <label for="year" class="input-group-text">Pesquise pelo ano</label>
@@ -22,18 +22,24 @@
                     min="1920"
                     max="9999"
                     class="form-control"
-                    placeholder="Ano de busca ou vazio para listar todos"
+                    placeholder="Ano do veículo"
                 />
-                <input type="submit" value="Pesquisar" class="btn btn-outline-secondary">
+                <button class="btn btn-outline-primary" title="Pesquisar" type="submit">
+                    <i class="bi bi-search"></i>
+                    <span class="ms-2 ml-2 d-none d-md-inline">Buscar</span>
+                </button>
             </div>
         </form>
     </div>
-    <a class="nav-link" asp-action="store" asp-conroller="car">Cadastrar novo veículo</a>
+    <a class="btn btn-outline-secondary" asp-action="store" asp-conroller="car" title="Cadastrar novo veículo">
+        <i class="bi bi-plus-lg"></i>
+        <span class="ms-2 ml-2"><span class="d-none d-md-inline">Cadastrar</span> veículo</span>
+    </a>
 </div>
 
 <div class="table-responsive-md">
     <table class="table table-striped table-hover table-sm table-bordered table-primary">
-        <caption>Total de veículos cadastrados em nossa base: @Model.Count()</caption>
+        <caption>Total de veículos @(@ViewBag.filter ? "encontrados" : "cadastrados") em nossa base: @Model.Count()</caption>
         <thead class="thead-dark">
             <tr class="text-center">
                 <th scope="col">#</th>
@@ -81,10 +87,10 @@
                             <div class="btn-group btn-group-sm" role="group" aria-label="Ações">
                                 <a asp-action="edit" asp-route-id="@car.Id" class="btn btn-outline-info" title="Editar">
                                     <i class="bi bi-pencil"></i>
-                                    <span class="sr-only visually-hidden">Editar</span>
+                                    <span class="sr-only visually-hidden">Editar registro</span>
                                 </a>
 
-                                <button
+                                <button 
                                     class="btn btn-outline-danger car-remove"
                                     title="Excluir"
                                     data-toggle="modal"
@@ -108,18 +114,18 @@
 <partial name="_Modal" />
 
 @section Scripts {
-    <script>
-        $(document).ready(function(){
-            $('.car-remove').click(function(){
-                const elmnt = this;
+<script>
+    $(document).ready(function () {
+        $('.car-remove').click(function () {
+            const elmnt = this;
 
-                const id = $(elmnt).data("car-id");
-                const model = $(elmnt).data('car-model');
-                const manufacturer = $(elmnt).data('car-manufacturer');
+            const id = $(elmnt).data("car-id");
+            const model = $(elmnt).data('car-model');
+            const manufacturer = $(elmnt).data('car-manufacturer');
 
-                $("#carId").val(parseInt(id));
-                $("#carModelToRemove").text(`${manufacturer} ${model}`);
-            });
+            $("#carId").val(parseInt(id));
+            $("#carModelToRemove").text(`${manufacturer} ${model}`);
         });
-    </script>
+    });
+</script>
 }
