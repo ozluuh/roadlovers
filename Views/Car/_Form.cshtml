@@ -27,7 +27,9 @@
         <label asp-for="VehicleType"></label>
         <select
             asp-for="VehicleTypeId"
+            asp-items="ViewBag.classes"
             class="form-control"
+            required
         >
             <option selected hidden>Selecione a classe do veículo</option>
         </select>

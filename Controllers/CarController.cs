@@ -15,10 +15,13 @@ namespace roadlovers.Controllers
 
         private IManufacturerRepository _repoManufacturer;
 
-        public CarController(ICarRepository repo, IManufacturerRepository repoManufacturer)
+        private IVehicleTypeRepository _repoVehicleClasses;
+
+        public CarController(ICarRepository repo, IManufacturerRepository repoManufacturer, IVehicleTypeRepository repoVehicleClasses)
         {
             _repo = repo;
             _repoManufacturer = repoManufacturer;
+            _repoVehicleClasses = repoVehicleClasses;
         }
 
         // private static List<Car> _carros = new List<Car>() {
@@ -35,7 +38,7 @@ namespace roadlovers.Controllers
         public IActionResult Index(int? year)
         {
             IList<Car> cars = _repo.FindAll();
-            
+
             if (year == null)
             {
                 ViewBag.filter = false;
@@ -62,6 +65,7 @@ namespace roadlovers.Controllers
         public IActionResult Store()
         {
             LoadManufacturers();
+            LoadClasses();
             return View();
         }
 
@@ -69,6 +73,7 @@ namespace roadlovers.Controllers
         public IActionResult Edit(int id)
         {
             LoadManufacturers();
+            LoadClasses();
             return View(_repo.FindById(id));
         }
 
@@ -94,10 +99,18 @@ namespace roadlovers.Controllers
             return RedirectToAction("Index");
         }
 
-        public void LoadManufacturers(){
+        private void LoadManufacturers()
+        {
             IList<Manufacturer> manufacturers = _repoManufacturer.FindAll();
 
             ViewBag.manufacturers = new SelectList(manufacturers, "ManufacturerId", "Name");
+        }
+
+        private void LoadClasses()
+        {
+            IList<VehicleType> vehicleTypes = _repoVehicleClasses.FindAll();
+
+            ViewBag.classes = new SelectList(vehicleTypes, "VehicleTypeId", "Description");
         }
     }
 }

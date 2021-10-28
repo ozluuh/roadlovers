@@ -37,6 +37,7 @@ namespace roadlovers
             // Injeção de depêndencia do Repo
             services.AddScoped<ICarRepository, CarRepository>();
             services.AddScoped<IManufacturerRepository, ManufacturerRepository>();
+            services.AddScoped<IVehicleTypeRepository, VehicleTypeRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
