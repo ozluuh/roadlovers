@@ -51,6 +51,8 @@ namespace roadlovers.Repositories
             return _context
                         .Cars
                         .Where(c => c.CarId == id)
+                        .Include(m => m.Manufacturer)
+                        .Include(c => c.VehicleType)
                         .FirstOrDefault()
                     ;
         }

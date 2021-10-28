@@ -1,0 +1,56 @@
+@model VehicleColor
+@{
+    ViewData["Title"] = "Cores Disponíveis";
+}
+
+<h1>@Model.Car.Model
+    <span class="badge bg-info rounded-pill">@Model.Car.Manufacturer?.Name</span>
+</h1>
+
+<h2>Cores</h2>
+@if (@TempData["msg"] != null)
+{
+    <alert message='@TempData["msg"]' type="info"></alert>
+}
+<form asp-action="color" class="mb-3">
+    <div class="input-group">
+        <input type="hidden" name="CarId" value="@Model.Car.CarId">
+        <select
+            name="ColorId"
+            class="form-select"
+            aria-label="Cores Disponíveis"
+            asp-items="@ViewBag.selectColors"
+            asp-for="ColorId"
+        >
+            <option selected hidden>Selecione a cor</option>
+        </select>
+        <button
+            type="submit"
+            class="btn btn-outline-success d-flex"
+            data-toggle="tooltip"
+            data-placement="bottom"
+            title="Adicionar cor"
+        >
+            <i class="bi bi-plus-lg"></i>
+            <span class="d-none d-md-block ms-2 ml-2">Adicionar</span>
+        </button>
+        <a
+            class="btn btn-outline-info d-flex"
+            asp-controller="Car"
+            asp-action="Index"
+            data-toggle="tooltip"
+            data-placement="left"
+            title="Voltar à Dashboard"
+        >
+            <i class="bi bi-columns-gap"></i>
+            <span class="d-none d-md-block ms-2 ml-2">Veículos</span>
+        </a>
+    </div>
+</form>
+
+<ul class="list-group">
+    @foreach (var item in ViewBag.colors)
+    {
+        <li class="list-group-item">@item.Name</li>
+    }
+</ul>

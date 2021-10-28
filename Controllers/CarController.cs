@@ -17,11 +17,17 @@ namespace roadlovers.Controllers
 
         private IVehicleTypeRepository _repoVehicleClasses;
 
-        public CarController(ICarRepository repo, IManufacturerRepository repoManufacturer, IVehicleTypeRepository repoVehicleClasses)
+        private IColorRepository _repoColor;
+
+        private IVehicleColorRepository _repoVehCol;
+
+        public CarController(ICarRepository repo, IManufacturerRepository repoManufacturer, IVehicleTypeRepository repoVehicleClasses, IColorRepository repoColor, IVehicleColorRepository repoVehCol)
         {
             _repo = repo;
             _repoManufacturer = repoManufacturer;
             _repoVehicleClasses = repoVehicleClasses;
+            _repoColor = repoColor;
+            _repoVehCol = repoVehCol;
         }
 
         // private static List<Car> _carros = new List<Car>() {
@@ -31,21 +37,42 @@ namespace roadlovers.Controllers
         //     new Car(4,1993, "Diablo", 138000d, VehicleType.Exotic, Manufacturer.Lamborghini)
         // };
 
+        [HttpPost]
+        public IActionResult Color(VehicleColor vehicleColor)
+        {
+            _repoVehCol.Store(vehicleColor);
+            _repoVehCol.Commit();
 
+            return RedirectToAction("Colors", new { id = vehicleColor.CarId });
+        }
+
+        [HttpGet]
+        public IActionResult Colors(int id)
+        {
+            // All colors
+            IList<Color> allColors = _repoColor.FindAll();
+            // Vehicle colors
+            IList<Color> vehicleColors = _repoColor.FindAllByCarId(id);
+
+            var filtered = allColors.Where(c => !vehicleColors.Any(s => s.ColorId == c.ColorId));
+
+            ViewBag.selectColors = new SelectList(filtered, "ColorId", "Name");
+            ViewBag.colors = vehicleColors;
+
+            VehicleColor vehicleColor = new VehicleColor()
+            {
+                Car = _repo.FindById(id)
+            };
+
+            return View(vehicleColor);
+        }
 
 
         [HttpGet]
         public IActionResult Index(int? year)
         {
-            IList<Car> cars = _repo.FindAll();
+            IList<Car> cars = _repo.FindBy(s => (s.Year == year || year == null));
 
-            if (year == null)
-            {
-                ViewBag.filter = false;
-                return View(cars);
-            }
-
-            ViewBag.filter = true;
             return View(cars);
 
         }

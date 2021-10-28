@@ -13,5 +13,7 @@ namespace roadlovers.Repositories
         void Store(Color color);
 
         IList<Color> FindAll();
+
+        IList<Color> FindAllByCarId(int id);
     }
 }

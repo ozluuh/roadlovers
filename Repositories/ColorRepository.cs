@@ -26,6 +26,16 @@ namespace roadlovers.Repositories
             return _context.Colors.ToList();
         }
 
+        public IList<Color> FindAllByCarId(int id)
+        {
+            return _context
+                        .VehiclesColors
+                        .Where(s => s.CarId == id)
+                        .Select(s => s.Color)
+                    .ToList()
+                    ;
+        }
+
         public void Store(Color color)
         {
             _context.Colors.Add(color);

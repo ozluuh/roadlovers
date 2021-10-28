@@ -24,9 +24,9 @@
                     class="form-control"
                     placeholder="Ano do veículo"
                 />
-                <button class="btn btn-outline-primary" title="Pesquisar" type="submit">
+                <button class="btn btn-outline-primary d-flex" title="Pesquisar" type="submit">
                     <i class="bi bi-search"></i>
-                    <span class="ms-2 ml-2 d-none d-md-inline">Buscar</span>
+                    <span class="d-none d-md-block ms-2 ml-2">Buscar</span>
                 </button>
             </div>
         </form>
@@ -39,7 +39,7 @@
 
 <div class="table-responsive-md">
     <table class="table table-striped table-hover table-sm table-bordered table-primary">
-        <caption>Total de veículos @(@ViewBag.filter ? "encontrados" : "cadastrados") em nossa base: @Model.Count()</caption>
+        <caption>Total de veículos cadastrados em nossa base: @Model.Count()</caption>
         <thead class="thead-dark">
             <tr class="text-center">
                 <th scope="col">#</th>
@@ -103,11 +103,21 @@
                                     data-target="#removeCarModal"
                                     data-car-id="@car.CarId"
                                     data-car-model="@car.Model"
-                                    data-car-manufacturer="@car.Manufacturer"
+                                    data-car-manufacturer="@car.Manufacturer?.Name"
                                 >
                                     <i class="bi bi-trash"></i>
                                     <span class="sr-only visually-hidden">Remover registro</span>
                                 </button>
+
+                                <a 
+                                    asp-action="Colors"
+                                    asp-route-id="@car.CarId"
+                                    class="btn btn-outline-secondary"
+                                    title="Cores"
+                                >
+                                    <i class="bi bi-palette"></i>
+                                    <span class="sr-only visually-hidden">Cores Disponíveis</span>
+                                </a>
                             </div>
                         </div>
                     </td>
