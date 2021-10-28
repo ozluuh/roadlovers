@@ -1,4 +1,6 @@
 using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -34,6 +36,9 @@ namespace roadlovers.Models
         [Display(Name = "Fabricante")]
         public Manufacturer Manufacturer { get; set; }
         public int? ManufacturerId { get; set; }
+
+        // N : M
+        public ICollection<VehicleColor> VehiclesColors { get; set; }
 
         public Car() { }
 
