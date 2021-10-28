@@ -6,9 +6,11 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using roadlovers.Persistence;
 
 namespace roadlovers
 {
@@ -25,6 +27,14 @@ namespace roadlovers
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
+
+            // Injeção de depêndencia do Context
+            services.AddDbContext<FactoryContext>(op =>
+                op.UseSqlServer(Configuration.GetConnectionString("dev"))
+            );
+
+            // Injeção de depêndencia do Repo
+            // services.AddScoped<>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
