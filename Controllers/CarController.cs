@@ -62,9 +62,16 @@ namespace roadlovers.Controllers
 
 
         [HttpGet]
-        public IActionResult Index(int? year)
+        public IActionResult Index(int? year, int? manufacturerId, int? vehicleTypeId)
         {
-            IList<Car> cars = _repo.FindBy(s => (s.Year == year || year == null));
+            IList<Car> cars = _repo.FindBy(s => 
+                (s.Year == year || year == null) && 
+                (s.ManufacturerId == manufacturerId || manufacturerId == null) &&
+                (s.VehicleTypeId == vehicleTypeId || vehicleTypeId == null) 
+            );
+
+            LoadManufacturers();
+            LoadClasses();
 
             return View(cars);
 

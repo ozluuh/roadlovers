@@ -14,7 +14,7 @@
     <div class="w--75">
         <form asp-action="index" method="GET">
             <div class="input-group">
-                <label for="year" class="input-group-text">Pesquise pelo ano</label>
+                <label for="year" class="input-group-text d-none d-lg-block">Pesquise pelo ano</label>
                 <input
                     type="number"
                     name="year"
@@ -24,6 +24,22 @@
                     class="form-control"
                     placeholder="Ano do veículo"
                 />
+                <select
+                    name="ManufacturerId"
+                    class="form-select"
+                    aria-label="Fabricantes"
+                    asp-items="@ViewBag.manufacturers"
+                >
+                    <option selected hidden>Fabricante...</option>
+                </select>
+                <select
+                    name="VehicleTypeId"
+                    class="form-select"
+                    aria-label="Classes"
+                    asp-items="@ViewBag.classes"
+                >
+                    <option selected hidden>Classe...</option>
+                </select>
                 <button class="btn btn-outline-primary d-flex" title="Pesquisar" type="submit">
                     <i class="bi bi-search"></i>
                     <span class="d-none d-md-block ms-2 ml-2">Buscar</span>

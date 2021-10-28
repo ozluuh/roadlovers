@@ -76,12 +76,6 @@ body {
   width: 75% !important;
 }
 
-@media (min-width: 768px) {
-  .w--75 {
-    width: 50% !important;
-  }
-}
-
 .form-floating > .form-control {
   height: 2.5rem;
 }
