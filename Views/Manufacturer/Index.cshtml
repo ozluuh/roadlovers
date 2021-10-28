@@ -1,0 +1,48 @@
+@model Manufacturer
+@{
+    ViewData["Title"] = "Fabricantes";
+}
+<h1 class="display-4">Fabricantes</h1>
+@if (@TempData["msg"] != null)
+{
+    <alert message='@TempData["msg"]' type="info"></alert>
+}
+<div class="row">
+    <div class="col-4">
+        <form asp-action="Store">
+            <div class="form-group">
+                <label asp-for="Name"></label>
+                <input asp-for="Name" placeholder="Nome da fabricante" class="form-control">
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <button type="submit" class="btn btn-outline-primary">
+                <i class="bi bi-save"></i>
+                <span class="">Salvar</span>
+            </button>
+        </form>
+    </div>
+    <div class="col-8">
+        <table class="table table-striped">
+            <caption>Total de Fabricantes cadastradas: @ViewBag.manufacturers.Count</caption>
+            <thead>
+                <tr class="text-center">
+                    <th scope="col">Nome</th>
+                </tr>
+            </thead>
+            <tbody>
+                @if (ViewBag.manufacturers.Count == 0)
+                {
+                    <tr class="text-center">
+                        <td class="">Nenhuma fabricante cadastrada.</td>
+                    </tr>
+                }
+                @foreach (var m in ViewBag.manufacturers)
+                {
+                    <tr class="text-center">
+                        <td class="text-start text-left">@m.Name</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

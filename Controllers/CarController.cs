@@ -1,18 +1,20 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using roadlovers.Models;
 using roadlovers.Persistence;
+using roadlovers.Repositories;
 
 namespace roadlovers.Controllers
 {
     public class CarController : Controller
     {
-        private FactoryContext _context;
+        private ICarRepository _repo;
 
-        public CarController(FactoryContext context)
+        public CarController(ICarRepository repo)
         {
-            this._context = context;
+            this._repo = repo;
         }
 
         // private static List<Car> _carros = new List<Car>() {
@@ -28,22 +30,24 @@ namespace roadlovers.Controllers
         [HttpGet]
         public IActionResult Index(int? year)
         {
+            IList<Car> cars = _repo.FindAll();
+            
             if (year == null)
             {
                 ViewBag.filter = false;
-                return View(_context.Cars.ToList());
+                return View(cars);
             }
 
             ViewBag.filter = true;
-
-            return View(_context.Cars.ToList());
+            return View(cars);
 
         }
 
         [HttpPost]
         public IActionResult Store(Car car)
         {
-            _context.Cars.Add(car);
+            _repo.Store(car);
+            _repo.Commit();
 
             @TempData["msg"] = $"Veículo {car.Manufacturer} {car.Model} cadastrado com sucesso";
 
@@ -67,9 +71,8 @@ namespace roadlovers.Controllers
         [HttpPost]
         public IActionResult Edit(Car car)
         {
-            // int i = _cars.FindIndex(c => c.Id == car.Id);
-
-            // _cars[i] = car;
+            _repo.Update(car);
+            _repo.Commit();
 
             @TempData["msg"] = $"Veículo atualizado com sucesso";
 
@@ -79,11 +82,10 @@ namespace roadlovers.Controllers
         [HttpPost]
         public IActionResult Remove(int id)
         {
-            // var car = _cars.Find(c => c.Id == id);
+            _repo.Destroy(id);
+            _repo.Commit();
 
-            // _cars.RemoveAll(c => c.Id == id);
-
-            // @TempData["msg"] = $"Veículo {car.Manufacturer} {car.Model} removido com sucesso";
+            @TempData["msg"] = $"Veículo removido com sucesso";
 
             return RedirectToAction("Index");
         }

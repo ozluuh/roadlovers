@@ -11,6 +11,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using roadlovers.Persistence;
+using roadlovers.Repositories;
 
 namespace roadlovers
 {
@@ -34,7 +35,8 @@ namespace roadlovers
             );
 
             // Injeção de depêndencia do Repo
-            // services.AddScoped<>();
+            services.AddScoped<ICarRepository, CarRepository>();
+            services.AddScoped<IManufacturerRepository, ManufacturerRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
