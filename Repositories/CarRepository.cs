@@ -1,7 +1,9 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 using roadlovers.Models;
 using roadlovers.Persistence;
 using roadlovers.Repositories;
@@ -31,6 +33,17 @@ namespace roadlovers.Repositories
         public IList<Car> FindAll()
         {
             return _context.Cars.ToList();
+        }
+
+        public IList<Car> FindBy(Expression<Func<Car, bool>> filter)
+        {
+            return _context
+                        .Cars
+                        .Where(filter)
+                        .Include(e => e.Manufacturer)
+                        .Include(e => e.VehicleType)
+                    .ToList()
+                    ;
         }
 
         public Car FindById(int id)

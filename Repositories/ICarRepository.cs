@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Threading.Tasks;
 using roadlovers.Models;
 
@@ -19,5 +20,7 @@ namespace roadlovers.Repositories
         void Commit();
 
         Car FindById(int id);
+
+        IList<Car> FindBy(Expression<Func<Car, bool>> filter);
     }
 }
