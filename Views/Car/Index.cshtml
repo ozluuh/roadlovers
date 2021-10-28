@@ -53,6 +53,12 @@
             </tr>
         </thead>
         <tbody>
+            @if (Model.Count == 0)
+            {
+                <tr class="text-center">
+                    <td colspan="8">Nenhum registro ainda...</td>
+                </tr>
+            }
             @foreach (var car in Model)
             {
                 <tr class="text-center">

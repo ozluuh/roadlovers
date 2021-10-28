@@ -14,7 +14,8 @@
     <div class="form-group">
         <label asp-for="Manufacturer"></label>
         <select
-            name="Manufacturer"
+            asp-for="ManufacturerId"
+            asp-items="ViewBag.manufacturers"
             class="form-control"
             required
         >
@@ -25,9 +26,8 @@
     <div class="form-group">
         <label asp-for="VehicleType"></label>
         <select
-            name="VehicleType"
+            asp-for="VehicleTypeId"
             class="form-control"
-            required
         >
             <option selected hidden>Selecione a classe do veículo</option>
         </select>
