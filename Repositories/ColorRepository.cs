@@ -21,6 +21,11 @@ namespace roadlovers.Repositories
             _context.SaveChanges();
         }
 
+        public IList<Color> FindAll()
+        {
+            return _context.Colors.ToList();
+        }
+
         public void Store(Color color)
         {
             _context.Colors.Add(color);

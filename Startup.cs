@@ -39,6 +39,7 @@ namespace roadlovers
             services.AddScoped<IManufacturerRepository, ManufacturerRepository>();
             services.AddScoped<IVehicleTypeRepository, VehicleTypeRepository>();
             services.AddScoped<IVehicleColorRepository, VehicleColorRepository>();
+            services.AddScoped<IColorRepository, ColorRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

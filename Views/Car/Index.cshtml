@@ -72,11 +72,11 @@
                             @car.Year
                         </div>
                     </td>
-                    <td>@car.Manufacturer</td>
+                    <td>@car.Manufacturer?.Name</td>
                     <td>@car.Model</td>
                     <td>
                         <div>
-                            @car.VehicleType
+                            @car.VehicleType?.Description
                         </div>
                     </td>
                     <td>

@@ -11,5 +11,7 @@ namespace roadlovers.Repositories
         void Commit();
 
         void Store(Color color);
+
+        IList<Color> FindAll();
     }
 }

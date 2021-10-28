@@ -1,0 +1,52 @@
+@model Color
+
+@{
+    ViewData["Title"] = "Cores";
+}
+<h1 class="display-4">Cores</h1>
+@if (@TempData["msg"] != null)
+{
+    <alert message='@TempData["msg"]' type="info"></alert>
+}
+<div class="row">
+    <div class="col-6">
+        <form asp-action="Store">
+            <div class="input-group mb-3">
+                <div class="form-floating">
+                    <input asp-for="Name" placeholder="Informe o nome da cor" class="form-control">
+                    <label asp-for="Name"></label>
+                </div>
+
+                <button type="submit" class="btn btn-outline-primary d-flex">
+                    <i class="bi bi-save"></i>
+                    <span class="d-none d-md-block ms-2 ml-2">Salvar</span>
+                </button>
+            </div>
+            <span asp-validation-for="Name" class="text-danger"></span>
+        </form>
+    </div>
+    <div class="col-6">
+        <table class="table table-striped">
+            <caption>Total de Cores cadastradas: @ViewBag.colors.Count</caption>
+            <thead>
+                <tr class="text-center">
+                    <th scope="col">Cor</th>
+                </tr>
+            </thead>
+            <tbody>
+                @if (ViewBag.colors.Count == 0)
+                {
+                    <tr class="text-center">
+                        <td class="">Nenhuma cor cadastrada.</td>
+                    </tr>
+                }
+                @foreach (var m in ViewBag.colors)
+                {
+                    <tr class="text-center">
+                        <td class="text-start text-left">@m.Name</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
