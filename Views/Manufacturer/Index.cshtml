@@ -8,20 +8,23 @@
     <alert message='@TempData["msg"]' type="info"></alert>
 }
 <div class="row">
-    <div class="col-4">
+    <div class="col-6">
         <form asp-action="Store">
-            <div class="form-group">
-                <label asp-for="Name"></label>
-                <input asp-for="Name" placeholder="Nome da fabricante" class="form-control">
-                <span asp-validation-for="Name" class="text-danger"></span>
+            <div class="input-group">
+                <div class="form-floating">
+                    <input asp-for="Name" placeholder="Nome da fabricante" class="form-control">
+                    <label asp-for="Name"></label>
+                </div>
+                
+                <button type="submit" class="btn btn-outline-primary d-flex">
+                    <i class="bi bi-save"></i>
+                    <span class="d-none d-md-block ms-2 ml-2">Salvar</span>
+                </button>
             </div>
-            <button type="submit" class="btn btn-outline-primary">
-                <i class="bi bi-save"></i>
-                <span class="">Salvar</span>
-            </button>
+                <span asp-validation-for="Name" class="text-danger"></span>
         </form>
     </div>
-    <div class="col-8">
+    <div class="col-6">
         <table class="table table-striped">
             <caption>Total de Fabricantes cadastradas: @ViewBag.manufacturers.Count</caption>
             <thead>
