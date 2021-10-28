@@ -9,10 +9,13 @@ namespace roadlovers.Models
 {
     [Table("Tbl_Manufacturers")]
     public class Manufacturer
-{
-    [Column("Id"), HiddenInput]
-    public int ManufacturerId { get; set; }
+    {
+        [Column("Id"), HiddenInput]
+        public int ManufacturerId { get; set; }
 
-    public string Name { get; set; }
-}
+        public string Name { get; set; }
+
+        // 1 : N
+        public virtual ICollection<Car> cars { get; set; }
+    }
 }

@@ -15,5 +15,8 @@ namespace roadlovers.Models
         public int VehicleTypeId { get; set; }
 
         public string Description { get; set; }
+
+        // 1 : N
+        public virtual ICollection<Car> cars { get; set; }
     }
 }
