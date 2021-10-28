@@ -14,8 +14,7 @@
     <div class="form-group">
         <label asp-for="Manufacturer"></label>
         <select
-            asp-for="Manufacturer"
-            asp-items="@Html.GetEnumSelectList<Manufacturer>()"
+            name="Manufacturer"
             class="form-control"
             required
         >
@@ -26,8 +25,7 @@
     <div class="form-group">
         <label asp-for="VehicleType"></label>
         <select
-            asp-for="VehicleType"
-            asp-items="@Html.GetEnumSelectList<VehicleType>()"
+            name="VehicleType"
             class="form-control"
             required
         >

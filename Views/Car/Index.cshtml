@@ -58,7 +58,7 @@
                 <tr class="text-center">
                     <th scope="row">
                         <div class="text-right text-end">
-                            @car.Id
+                            @car.CarId
                         </div>
                     </th>
                     <td>
@@ -85,7 +85,7 @@
                     <td>
                         <div class="d-flex justify-content-center">
                             <div class="btn-group btn-group-sm" role="group" aria-label="Ações">
-                                <a asp-action="edit" asp-route-id="@car.Id" class="btn btn-outline-info" title="Editar">
+                                <a asp-action="edit" asp-route-id="@car.CarId" class="btn btn-outline-info" title="Editar">
                                     <i class="bi bi-pencil"></i>
                                     <span class="sr-only visually-hidden">Editar registro</span>
                                 </a>
@@ -95,7 +95,7 @@
                                     title="Excluir"
                                     data-toggle="modal"
                                     data-target="#removeCarModal"
-                                    data-car-id="@car.Id"
+                                    data-car-id="@car.CarId"
                                     data-car-model="@car.Model"
                                     data-car-manufacturer="@car.Manufacturer"
                                 >

@@ -9,7 +9,7 @@ namespace roadlovers.Models
     {
         // Guid.NewGuid().ToString();
         [HiddenInput]
-        public int Id { get; set; }
+        public int CarId { get; set; }
 
         [Display(Name = "Ano")]
         public int Year { get; set; }
@@ -22,11 +22,14 @@ namespace roadlovers.Models
 
         public DateTime CreatedAt { get; private set; } = DateTime.Now;
 
-        [Display(Name = "Classe")]
+        // [Display(Name = "Classe")]
         public VehicleType VehicleType { get; set; }
 
-        [Display(Name = "Fabricante")]
+        public int VehicleTypeId { get; set; }
+
+        // [Display(Name = "Fabricante")]
         public Manufacturer Manufacturer { get; set; }
+        public int ManufacturerId { get; set; }
 
         public Car() { }
 
@@ -41,7 +44,7 @@ namespace roadlovers.Models
 
         public Car(int Id, int Year, string Model, double Value, VehicleType VehicleType, Manufacturer Manufacturer)
         {
-            this.Id = Id;
+            this.CarId = Id;
             this.Year = Year;
             this.Model = Model;
             this.Value = Value;
@@ -50,26 +53,26 @@ namespace roadlovers.Models
         }
     }
 
-    public enum VehicleType
-    {
-        SUV,
-        [Display(Name = "Utilitário")]
-        Utilitary,
-        [Display(Name = "Esportivo")]
-        Sports,
-        Muscle,
-        [Display(Name = "Luxo")]
-        Luxury,
-        [Display(Name = "Exótico")]
-        Exotic,
-        Tuner
-    }
+    // public enum VehicleType
+    // {
+    //     SUV,
+    //     [Display(Name = "Utilitário")]
+    //     Utilitary,
+    //     [Display(Name = "Esportivo")]
+    //     Sports,
+    //     Muscle,
+    //     [Display(Name = "Luxo")]
+    //     Luxury,
+    //     [Display(Name = "Exótico")]
+    //     Exotic,
+    //     Tuner
+    // }
 
-    public enum Manufacturer
-    {
-        Ferrari, Lamborghini, Toyota, Honda, Hyundai, Chevrolet, Gemballa, Nissan,
-        [Display(Name = "Mercedes-Benz")]
-        Mercedes_Benz,
-        Dodge, Hummer, Mitsubishi
-    }
+    // public enum Manufacturer
+    // {
+    //     Ferrari, Lamborghini, Toyota, Honda, Hyundai, Chevrolet, Gemballa, Nissan,
+    //     [Display(Name = "Mercedes-Benz")]
+    //     Mercedes_Benz,
+    //     Dodge, Hummer, Mitsubishi
+    // }
 }
