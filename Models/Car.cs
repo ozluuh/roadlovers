@@ -61,27 +61,4 @@ namespace roadlovers.Models
             this.Manufacturer = Manufacturer;
         }
     }
-
-    // public enum VehicleType
-    // {
-    //     SUV,
-    //     [Display(Name = "Utilitário")]
-    //     Utilitary,
-    //     [Display(Name = "Esportivo")]
-    //     Sports,
-    //     Muscle,
-    //     [Display(Name = "Luxo")]
-    //     Luxury,
-    //     [Display(Name = "Exótico")]
-    //     Exotic,
-    //     Tuner
-    // }
-
-    // public enum Manufacturer
-    // {
-    //     Ferrari, Lamborghini, Toyota, Honda, Hyundai, Chevrolet, Gemballa, Nissan,
-    //     [Display(Name = "Mercedes-Benz")]
-    //     Mercedes_Benz,
-    //     Dodge, Hummer, Mitsubishi
-    // }
 }

@@ -30,13 +30,6 @@ namespace roadlovers.Controllers
             _repoVehCol = repoVehCol;
         }
 
-        // private static List<Car> _carros = new List<Car>() {
-        //     new Car(1,1963, "Corvette (C2)", 55000d, VehicleType.Muscle, Manufacturer.Chevrolet),
-        //     new Car(2,2006, "Cobalt SS", 20000d, VehicleType.Sports, Manufacturer.Chevrolet),
-        //     new Car(3,2009, "CLS55 AMG", 270000d, VehicleType.Luxury, Manufacturer.Mercedes_Benz),
-        //     new Car(4,1993, "Diablo", 138000d, VehicleType.Exotic, Manufacturer.Lamborghini)
-        // };
-
         [HttpPost]
         public IActionResult Color(VehicleColor vehicleColor)
         {
