@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using roadlovers.Models;
 using roadlovers.Persistence;
@@ -12,9 +13,12 @@ namespace roadlovers.Controllers
     {
         private ICarRepository _repo;
 
-        public CarController(ICarRepository repo)
+        private IManufacturerRepository _repoManufacturer;
+
+        public CarController(ICarRepository repo, IManufacturerRepository repoManufacturer)
         {
-            this._repo = repo;
+            _repo = repo;
+            _repoManufacturer = repoManufacturer;
         }
 
         // private static List<Car> _carros = new List<Car>() {
@@ -57,15 +61,15 @@ namespace roadlovers.Controllers
         [HttpGet]
         public IActionResult Store()
         {
+            LoadManufacturers();
             return View();
         }
 
         [HttpGet]
         public IActionResult Edit(int id)
         {
-            // var car = _context.Cars.Find(car => car.);
-
-            return View();
+            LoadManufacturers();
+            return View(_repo.FindById(id));
         }
 
         [HttpPost]
@@ -88,6 +92,12 @@ namespace roadlovers.Controllers
             @TempData["msg"] = $"Veículo removido com sucesso";
 
             return RedirectToAction("Index");
+        }
+
+        public void LoadManufacturers(){
+            IList<Manufacturer> manufacturers = _repoManufacturer.FindAll();
+
+            ViewBag.manufacturers = new SelectList(manufacturers, "ManufacturerId", "Name");
         }
     }
 }

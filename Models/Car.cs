@@ -1,14 +1,15 @@
 using System;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.AspNetCore.Mvc;
 
 namespace roadlovers.Models
 {
+    [Table("Tbl_Cars")]
     public class Car
     {
-        // Guid.NewGuid().ToString();
-        [HiddenInput]
+        [Column("Id"), HiddenInput]
         public int CarId { get; set; }
 
         [Display(Name = "Ano")]
@@ -20,16 +21,19 @@ namespace roadlovers.Models
         [Display(Name = "Valor")]
         public double Value { get; set; }
 
+        [Column("Created_at")]
         public DateTime CreatedAt { get; private set; } = DateTime.Now;
 
-        // [Display(Name = "Classe")]
+        // N : 1
+        [Display(Name = "Classe")]
         public VehicleType VehicleType { get; set; }
 
-        public int VehicleTypeId { get; set; }
+        public int? VehicleTypeId { get; set; }
 
-        // [Display(Name = "Fabricante")]
+        // N : 1
+        [Display(Name = "Fabricante")]
         public Manufacturer Manufacturer { get; set; }
-        public int ManufacturerId { get; set; }
+        public int? ManufacturerId { get; set; }
 
         public Car() { }
 
